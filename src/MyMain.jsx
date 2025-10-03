@@ -6,33 +6,32 @@ const [formData, setFormData] = useState({
     author: "",
     title: "",
     body: "",
-    public: "",
+    public: false,
 
 
 })
 
 function handleFormData(e) {
+    console.log(e.target);
+    let value;
+    if (e.target.type === "checkbox") {
+
+        value = e.target.checked
+        
+    } else {
+        value = e.target.value
+        
+    }
     setFormData({
          ...formData,
-        [e.target.name]: e.target.value
-    })
+        [e.target.name]: value
+    })    
 }
 
-/* const  handleFormData = (e) => {
-
-    const { author, title, body, checked} = e.target
-
-    if (type === "checkbox") {
-        setFormData({...formData, [name]: checked})
-    } else {
-        setFormData({...formData, [name]: value })
-    }
-};
- */
     /* Funzione per invio a form API */
     function handleSubmit(e) {
     e.preventDefault()
-    axios.props("https://**67c5b4f3351c081993fb1ab6**.mockapi.io**/api**/posts")
+    axios.post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
     .then(res => console.log("dati inviati", res.data))
     .catch(error => console.log(error))
 }     
@@ -85,13 +84,14 @@ function handleFormData(e) {
                         type="checkbox" 
                         id="horns" 
                         checked={formData.public}
-                        name="public" 
+                        name="public"
+                        onChange={handleFormData}
                         />
-                        <label for="horns">Post pubblico</label>
+                        <label htmlFor="horns">Post pubblico</label>
                 </div>
 
 
-
+<button type="submit">prova</button>
                 </form>
             </div>
 
