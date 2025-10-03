@@ -1,73 +1,89 @@
 import { useState } from "react"
 export default function MyMain() {
 
-
-const {addApi, setAddApi} = useState({
+/* Stato per la gestione del form */
+const [formData, setFormData] = useState({
     author: "",
     title: "",
     body: "",
     public: "",
 
+    
 })
-    /* Funzione per invio a form API */
 
-/*      function handleSubmit(e) {
-        e.preventDefault();
-        axios.props()
+function handleFormData(e) {
+    setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+    })
+}
+    /* Funzione per invio a form API */
+/*         axios.props()
         .then(res => console.log("dati inviati", res.data))
-        .catch(error => console.log(error))
-    }  */
+        .catch(error => console.log(error)) */
+     
 
 
     return (
         <main>
-            <div>
+            <div className="boxInput">
                 <form action="">
                 <div>
                     {/* INPUT author */}
-                    <label htmlFor="">Inserisci il nome dell'autore</label>
+                    <label>Inserisci il nome dell'autore</label><br />
                     <input type="text" 
                     placeholder="Inserisci autore"
+                    value={formData.author}
+                    onChange={handleFormData}
                     name="author"
-                    /> <br />
+                    /> 
                 </div>
 
-                <div>
+                <div className="boxInput">
 
                     {/* INPUT tittle */}
-                    <label htmlFor=""> Inserisci titolo</label>
+                    <label > Inserisci titolo</label> <br />
                     <input type="text" 
                     placeholder=">Inserisci il titolo"
-                    name="author"
-                    /> <br />
+                    value={formData.title}
+                    onChange={handleFormData}
+                    name="title"
+                    /> 
                 </div>
 
-                <div>
+                <div className="boxInput">
                     {/* INPUT testo */}
-                    <label htmlFor=""> Inserisci titolo</label>
-                    <textarea name="" id=""></textarea>
+                    <label htmlFor=""> Inserisci contenuto del post</label> <br />
+                    <textarea 
+                    value={formData.body}
+                    onChange={handleFormData}
+                    name="body" 
+                    
+                    ></textarea>
 
                 </div>
 
-                <div>
-                <fieldset>
-                    <legend>Il post è pubblico?</legend>
-
-                    <div>
-                        <input type="checkbox" id="scales" name="scales" checked />
-                        <label for="scales">SI</label>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" id="horns" name="horns" />
-                        <label for="horns">NO</label>
-                    </div>
-                </fieldset>
-
+                <div className="boxInput">
+                        <input 
+                        type="checkbox" 
+                        id="horns" 
+                        name="public" 
+                        checked={formData.public}
+                        />
+                        <label for="horns">Post pubblico</label>
                 </div>
 
                 </form>
             </div>
+
+
+            {/* Test di stampa */}
+            <ul>
+                <li> AUTORE: {formData.author} </li>
+                <li> TITOLO: {formData.title} </li>
+                <li> TESTO: {formData.body} </li>
+                <li> PUBBLICO? {formData.public} </li>
+            </ul>
         </main>
     )
 }
