@@ -4,5 +4,10 @@
   padding: 0;
 }
 .boxInput {
-  margin: 20px;
+  padding: 10px;
+  background-color: wheat;
+}
+.boxStampa {
+  background-color: rgb(173, 140, 117);
+  padding: 10px;
 }

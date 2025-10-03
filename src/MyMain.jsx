@@ -8,26 +8,43 @@ const [formData, setFormData] = useState({
     body: "",
     public: "",
 
-    
+
 })
 
 function handleFormData(e) {
     setFormData({
-        ...formData,
+         ...formData,
         [e.target.name]: e.target.value
     })
 }
+
+/* const  handleFormData = (e) => {
+
+    const { author, title, body, checked} = e.target
+
+    if (type === "checkbox") {
+        setFormData({...formData, [name]: checked})
+    } else {
+        setFormData({...formData, [name]: value })
+    }
+};
+ */
     /* Funzione per invio a form API */
-/*         axios.props()
-        .then(res => console.log("dati inviati", res.data))
-        .catch(error => console.log(error)) */
+    function handleSubmit(e) {
+    e.preventDefault()
+    axios.props("https://**67c5b4f3351c081993fb1ab6**.mockapi.io**/api**/posts")
+    .then(res => console.log("dati inviati", res.data))
+    .catch(error => console.log(error))
+}     
      
 
 
     return (
         <main>
             <div className="boxInput">
-                <form action="">
+                <form action=""
+                onSubmit={handleSubmit}
+                >
                 <div>
                     {/* INPUT author */}
                     <label>Inserisci il nome dell'autore</label><br />
@@ -67,23 +84,27 @@ function handleFormData(e) {
                         <input 
                         type="checkbox" 
                         id="horns" 
-                        name="public" 
                         checked={formData.public}
+                        name="public" 
                         />
                         <label for="horns">Post pubblico</label>
                 </div>
+
+
 
                 </form>
             </div>
 
 
             {/* Test di stampa */}
+            <div className="boxStampa">
             <ul>
                 <li> AUTORE: {formData.author} </li>
                 <li> TITOLO: {formData.title} </li>
                 <li> TESTO: {formData.body} </li>
                 <li> PUBBLICO? {formData.public} </li>
             </ul>
+            </div>
         </main>
     )
 }
